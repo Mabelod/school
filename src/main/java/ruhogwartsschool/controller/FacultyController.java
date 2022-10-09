@@ -42,11 +42,12 @@ public class FacultyController {
     }
 
     @DeleteMapping("{id}")
-    public Faculty deleteFaculty(@PathVariable Long id) {
-        return facultyService.deleteFaculty(id);
+    public ResponseEntity deleteFaculty(@PathVariable Long id) {
+        facultyService.deleteFaculty(id);
+        return ResponseEntity.ok().build();
     }
 
-    @GetMapping("color")
+    @GetMapping()
     public ResponseEntity<Collection<Faculty>> getColorFacultyInfo(@RequestParam String color) {
         List<Faculty> colors = facultyService.colorFaculty(color);
         return ResponseEntity.ok(colors);

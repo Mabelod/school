@@ -2,6 +2,7 @@ package ruhogwartsschool.service;
 
 import org.springframework.stereotype.Service;
 import ruhogwartsschool.model.Faculty;
+import ruhogwartsschool.repository.FacultyRepository;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,33 +12,31 @@ import java.util.stream.Collectors;
 
 @Service
 public class FacultyService {
-    private final HashMap<Long, Faculty> faculties = new HashMap<>();
-    private long lastId = 0;
+
+    private final FacultyRepository facultyRepository;
+
+    public FacultyService(FacultyRepository facultyRepository) {
+        this.facultyRepository = facultyRepository;
+    }
 
     public Faculty crateFaculty(Faculty faculty) {
-        faculty.setId(++lastId);
-        faculties.put(lastId, faculty);
-        return faculty;
+        return facultyRepository.save(faculty);
     }
 
     public Faculty findFaculty(long id) {
-        return faculties.get(id);
+        return facultyRepository.findById(id).get();
     }
 
     public Faculty editFaculty(Faculty faculty) {
-        if (faculties.containsKey(faculty.getId())) {
-            faculties.put(faculty.getId(), faculty);
-            return faculty;
-        }
-        return null;
+        return facultyRepository.save(faculty);
     }
 
-    public Faculty deleteFaculty(long id) {
-        return faculties.remove(id);
+    public void deleteFaculty(long id) {
+        facultyRepository.deleteById(id);
     }
 
     public Collection<Faculty> getAllFaculty() {
-        return new ArrayList<>(faculties.values());
+        return facultyRepository.findAll();
     }
 
     public List<Faculty> colorFaculty(String color) {
