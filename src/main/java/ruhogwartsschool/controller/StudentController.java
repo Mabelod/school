@@ -47,9 +47,24 @@ public class StudentController {
         return ResponseEntity.ok().build();
     }
 
+//    @GetMapping()
+//    public ResponseEntity<Collection<Student>> getAgeStudentInfo(@RequestParam Long age) {
+//        List<Student> students = studentService.AgeStudent(age);
+//        return ResponseEntity.ok(students);
+//    }
+
     @GetMapping()
-    public ResponseEntity<Collection<Student>> getAgeStudentInfo(@RequestParam Long age) {
-        List<Student> students = studentService.AgeStudent(age);
-        return ResponseEntity.ok(students);
+    public ResponseEntity findStudent(@RequestParam("min") int min, @RequestParam("max") int max) {
+        return ResponseEntity.ok(studentService.findByAge(min, max));
+    }
+
+    @GetMapping("findFaculty")
+    public ResponseEntity findStudentFaculty(@RequestParam("idStudent") int idStudent) {
+        return ResponseEntity.ok(studentService.findByFaculty(idStudent));
     }
 }
+
+//    @GetMapping("faculty")
+//    public ResponseEntity findStudentFaculty(@RequestParam("idFaculty") String name) {
+//        return ResponseEntity.ok(studentService.findByFaculty(name));
+//    }

@@ -47,9 +47,25 @@ public class FacultyController {
         return ResponseEntity.ok().build();
     }
 
+    //    @GetMapping()
+//    public ResponseEntity<Collection<Faculty>> getColorFacultyInfo(@RequestParam String color) {
+//        List<Faculty> colors = facultyService.colorFaculty(color);
+//        return ResponseEntity.ok(colors);
+//    }
     @GetMapping()
-    public ResponseEntity<Collection<Faculty>> getColorFacultyInfo(@RequestParam String color) {
-        List<Faculty> colors = facultyService.colorFaculty(color);
-        return ResponseEntity.ok(colors);
+    public ResponseEntity getColorFacultyInfo(@RequestParam(required = false) String color,
+                                              @RequestParam(required = false) String name) {
+        if (color != null && !color.isBlank()) {
+            return ResponseEntity.ok(facultyService.findFacultyColor(color));
+        }
+        if (name != null && !name.isBlank()) {
+            return ResponseEntity.ok(facultyService.findFacultyName(name));
+        }
+        return ResponseEntity.ok(facultyService.getAllFaculty());
+    }
+
+    @GetMapping("findStudent")
+    public ResponseEntity<Collection<Student>> findFacultyStudents(@RequestParam("idFaculty") int idFaculty) {
+        return ResponseEntity.ok(facultyService.findByStudent(idFaculty));
     }
 }

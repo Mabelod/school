@@ -1,8 +1,11 @@
 package ruhogwartsschool.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 @Entity
 public class Faculty {
@@ -12,11 +15,13 @@ public class Faculty {
     private String name;
     private String color;
 
-//    public Faculty(Long id, String name, String color) {
-//        this.id = id;
-//        this.name = name;
-//        this.color = color;
-//    }
+    @OneToMany(mappedBy = "faculty")
+    @JsonIgnore
+    private Collection<Student> students;
+
+    public Collection<Student> getStudents() {
+        return students;
+    }
 
     public Long getId() {
         return id;
