@@ -50,7 +50,7 @@ public class FacultyService {
         return facultyRepository.findFacultiesByNameContainingIgnoreCase(name);
     }
 
-    public Collection<Student> findByStudent(long idStudent) {
-        return facultyRepository.findById(idStudent).get().getStudents();
+    public Collection<Student> findByStudent(long idFaculty) {
+        return facultyRepository.findById(idFaculty).get().getStudents();
     }
 }
