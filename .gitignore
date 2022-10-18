@@ -32,7 +32,7 @@ build/
 ### VS Code ###
 .vscode/
 /.mvn/
-/src/main/resources/
 /mvnw
 /mvnw.cmd
 /src/test/java/ruhogwartsschool/SchoolApplicationTests.java
+/src/main/java/ruhogwartsschool/service/MainTest.java
