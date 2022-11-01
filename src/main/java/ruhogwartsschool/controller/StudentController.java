@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import ruhogwartsschool.model.Student;
 import ruhogwartsschool.service.StudentService;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.Collection;
 import java.util.List;
 
@@ -61,6 +63,21 @@ public class StudentController {
     @GetMapping("findFaculty")
     public ResponseEntity findStudentFaculty(@RequestParam("idStudent") int idStudent) {
         return ResponseEntity.ok(studentService.findByFaculty(idStudent));
+    }
+
+    @GetMapping("/totalCount")
+    public int totalCountOfStudents() {
+        return studentService.totalCountOfStudents();
+    }
+
+    @GetMapping("/averageAge")
+    public double averageAgeOfStudents() {
+        return studentService.averageAgeOfStudents();
+    }
+
+    @GetMapping("/lastStudents")
+    public List<Student> lastStudents(@RequestParam @Min(1) @Max(10) int count) {
+        return studentService.lastStudents(count);
     }
 }
 

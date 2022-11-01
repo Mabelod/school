@@ -2,6 +2,7 @@ package ruhogwartsschool.service;
 
 import org.apache.catalina.Store;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ruhogwartsschool.model.Avatar;
@@ -11,6 +12,8 @@ import ruhogwartsschool.repository.AvatarRepository;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
 @Service
@@ -53,5 +56,9 @@ public class AvatarService {
     }
     private String getExtensions(String fileName) {
         return fileName.substring(fileName.lastIndexOf(".") + 1);
+    }
+
+    public List<Avatar> findByPagination(int page, int size) {
+        return avatarRepository.findAll(PageRequest.of(page, size)).get().collect(Collectors.toList());
     }
 }

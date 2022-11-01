@@ -1,10 +1,13 @@
 package ruhogwartsschool.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import ruhogwartsschool.model.Faculty;
 import ruhogwartsschool.model.Student;
 import ruhogwartsschool.repository.StudentRepository;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,4 +52,15 @@ public class StudentService {
         return studentRepository.findById(idStudent).get().getFaculty();
     }
 
+    public int totalCountOfStudents() {
+        return studentRepository.totalCountOfStudents();
+    }
+
+    public double averageAgeOfStudents() {
+        return studentRepository.averageAgeOfStudents();
+    }
+
+    public List<Student> lastStudents(int count) {
+        return studentRepository.lastStudents(count);
+    }
 }
