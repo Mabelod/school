@@ -6,3 +6,6 @@ ALTER TABLE student
 
 ALTER TABLE faculty
     add constraint unique_color unique (color);
+
+ALTER TABLE faculty
+    add constraint unique_nameFaculty unique (name);
