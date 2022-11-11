@@ -1,5 +1,7 @@
 package ruhogwartsschool.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import ruhogwartsschool.model.Faculty;
@@ -16,27 +18,34 @@ import java.util.stream.Collectors;
 public class StudentService {
     private final StudentRepository studentRepository;
 
+    private static final Logger LOG = LoggerFactory.getLogger(StudentService.class);
+
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
 
     public Student crateStudent(Student student) {
+        LOG.debug("Method crateStudent was invoked");
         return studentRepository.save(student);
     }
 
     public Student findStudent(Long id) {
+        LOG.debug("Method findStudent was invoked");
         return studentRepository.findById(id).get();
     }
 
     public Student editStudent(Student student) {
+        LOG.debug("Method editStudent was invoked");
         return studentRepository.save(student);
     }
 
     public void deleteStudent(Long id) {
+        LOG.debug("Method deleteStudent was invoked");
         studentRepository.deleteById(id);
     }
 
     public Collection<Student> getAllStudents() {
+        LOG.debug("Method getAllStudents was invoked");
         return studentRepository.findAll();
     }
 
@@ -45,22 +54,27 @@ public class StudentService {
     }
 
     public Collection<Student> findByAge(int min, int max) {
+        LOG.debug("Method findByAge was invoked");
         return studentRepository.findByAgeBetween(min, max);
     }
 
     public Faculty findByFaculty(long idStudent) {
+        LOG.debug("Method findByFaculty was invoked");
         return studentRepository.findById(idStudent).get().getFaculty();
     }
 
     public int totalCountOfStudents() {
+        LOG.debug("Method totalCountOfStudents was invoked");
         return studentRepository.totalCountOfStudents();
     }
 
     public double averageAgeOfStudents() {
+        LOG.debug("Method averageAgeOfStudents was invoked");
         return studentRepository.averageAgeOfStudents();
     }
 
     public List<Student> lastStudents(int count) {
+        LOG.debug("Method lastStudents was invoked");
         return studentRepository.lastStudents(count);
     }
 }
