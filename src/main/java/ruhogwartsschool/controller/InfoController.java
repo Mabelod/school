@@ -33,4 +33,14 @@ public class InfoController {
     public void testParallelStream() {
         infoService.testParallelStream();
     }
+
+    @GetMapping("/printStudents")
+    public void printStudents() {
+        infoService.printStudents();
+    }
+
+    @GetMapping("/printStudentsSync")
+    public void printStudentsSync() {
+        infoService.printStudentsSync();
+    }
 }
