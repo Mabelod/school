@@ -13,6 +13,7 @@ import javax.validation.constraints.Min;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class StudentService {
@@ -76,5 +77,20 @@ public class StudentService {
     public List<Student> lastStudents(int count) {
         LOG.debug("Method lastStudents was invoked");
         return studentRepository.lastStudents(count);
+    }
+
+    public Stream<String> findStudentNamesWhichStartedWithA() {
+        return studentRepository.findAll().stream()
+                .map(Student::getName)
+                .map(String::toUpperCase)
+                .filter(s -> s.startsWith("А"))
+                .sorted();
+    }
+
+    public double findStudentAverageAge() {
+        return studentRepository.findAll().stream()
+                .mapToDouble(Student::getAge)
+                .average()
+                .getAsDouble();
     }
 }

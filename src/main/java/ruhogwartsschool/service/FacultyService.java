@@ -7,10 +7,7 @@ import ruhogwartsschool.model.Faculty;
 import ruhogwartsschool.model.Student;
 import ruhogwartsschool.repository.FacultyRepository;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -64,5 +61,12 @@ public class FacultyService {
     public Collection<Student> findByStudent(long idFaculty) {
         LOG.debug("Method findByStudent was invoked");
         return facultyRepository.findById(idFaculty).get().getStudents();
+    }
+
+    public String findTheLongestFacultyName() {
+        return facultyRepository.findAll().stream()
+                .map(Faculty::getName)
+                .max(Comparator.comparingInt(String::length))
+                .get();
     }
 }

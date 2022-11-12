@@ -9,6 +9,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("student")
@@ -78,6 +79,16 @@ public class StudentController {
     @GetMapping("/lastStudents")
     public List<Student> lastStudents(@RequestParam @Min(1) @Max(10) int count) {
         return studentService.lastStudents(count);
+    }
+
+    @GetMapping("/findStudentNamesWhichStartedWithA")
+    public Stream<String> findStudentNamesWhichStartedWithA() {
+        return studentService.findStudentNamesWhichStartedWithA();
+    }
+
+    @GetMapping("/findStudentAverageAge")
+    public double findStudentAverageAge() {
+        return studentService.findStudentAverageAge();
     }
 }
 
